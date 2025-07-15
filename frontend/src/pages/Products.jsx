@@ -22,13 +22,11 @@ const Products = () => {
 
   const fetchProducts = async () => {
     try {
-      let query = supabase.from('products').select('*');
-      if (selectedCategory) {
-        query = query.eq('category', selectedCategory);
-      }
-      const { data, error } = await query;
-      if (error) throw error;
-      setProducts(data || []);
+      setLoading(true);
+      const res = await fetch('/api/products');
+      if (!res.ok) throw new Error('Failed to fetch products');
+      const data = await res.json();
+      setProducts(data.products || []);
     } catch (error) {
       console.error('Error fetching products:', error);
     } finally {

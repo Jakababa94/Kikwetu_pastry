@@ -13,10 +13,11 @@ const FeaturedProducts = () => {
 
   const fetchFeaturedProducts = async () => {
     try {
-      const response = await fetch('/api/products?limit=6');
+      const response = await fetch('/api/products');
       if (!response.ok) throw new Error('Failed to fetch products');
       const data = await response.json();
-      setProducts(data.products || []);
+      // Take first 6 products for featured section
+      setProducts((data.products || []).slice(0, 6));
     } catch (error) {
       console.error('Error fetching featured products:', error);
     } finally {

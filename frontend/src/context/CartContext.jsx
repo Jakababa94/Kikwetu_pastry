@@ -1,61 +1,55 @@
 import React, { createContext, useContext, useReducer, useEffect } from 'react';
 
-/* ---------- Helpers ---------- */
-const calculateTotal = items =>
-  items.reduce((total, item) => {
-    // 15 % bulk discount
-    const price = item.is_bulk ? item.product.price * 0.85 : item.product.price;
-    return total + price * item.quantity;
-  }, 0);
-
 /* ---------- Reducer ---------- */
 const cartReducer = (state, action) => {
   switch (action.type) {
     case 'ADD_ITEM': {
-      const { product, quantity, is_bulk } = action.payload;
-
-      const existingItem = state.items.find(
-        item => item.product.id === product.id && item.is_bulk === is_bulk
-      );
+      const { product } = action.payload;
+      console.log('Processing ADD_ITEM:', product);
+      console.log('Current cart state:', state);
+      
+      const existingItem = state.find(item => item._id === product._id);
 
       if (existingItem) {
-        const updatedItems = state.items.map(item =>
-          item.id === existingItem.id
-            ? { ...item, quantity: item.quantity + quantity }
+        console.log('Item exists, updating quantity');
+        return state.map(item =>
+          item._id === product._id
+            ? { ...item, qty: item.qty + 1 }
             : item
         );
-        return { ...state, items: updatedItems, total: calculateTotal(updatedItems) };
       }
 
       const newItem = {
-        id: `${product.id}-${is_bulk ? 'bulk' : 'single'}`,
-        product,
-        quantity,
-        is_bulk,
+        _id: product._id,
+        name: product.name,
+        price: product.price,
+        image: product.image,
+        qty: 1
       };
-
-      const updatedItems = [...state.items, newItem];
-      return { ...state, items: updatedItems, total: calculateTotal(updatedItems) };
+      
+      console.log('Adding new item:', newItem);
+      return [...state, newItem];
     }
 
     case 'REMOVE_ITEM': {
-      const updatedItems = state.items.filter(item => item.id !== action.payload);
-      return { ...state, items: updatedItems, total: calculateTotal(updatedItems) };
+      return state.filter(item => item._id !== action.payload);
     }
 
-    case 'UPDATE_QUANTITY': {
-      const { id, quantity } = action.payload;
-      const updatedItems = state.items.map(item =>
-        item.id === id ? { ...item, quantity } : item
+    case 'UPDATE_QTY': {
+      const { id, qty } = action.payload;
+      if (qty <= 0) {
+        return state.filter(item => item._id !== id);
+      }
+      return state.map(item =>
+        item._id === id ? { ...item, qty } : item
       );
-      return { ...state, items: updatedItems, total: calculateTotal(updatedItems) };
     }
 
     case 'CLEAR_CART':
-      return { items: [], total: 0 };
+      return [];
 
     case 'LOAD_CART':
-      return { items: action.payload, total: calculateTotal(action.payload) };
+      return action.payload;
 
     default:
       return state;
@@ -73,33 +67,51 @@ export const useCart = () => {
 
 /* ---------- Provider ---------- */
 export const CartProvider = ({ children }) => {
-  const [state, dispatch] = useReducer(cartReducer, { items: [], total: 0 });
+  const [cart, dispatch] = useReducer(cartReducer, []);
 
   /* Load cart from localStorage on mount */
   useEffect(() => {
     const saved = localStorage.getItem('cart');
-    if (saved) dispatch({ type: 'LOAD_CART', payload: JSON.parse(saved) });
+    if (saved) {
+      try {
+        const parsedCart = JSON.parse(saved);
+        dispatch({ type: 'LOAD_CART', payload: parsedCart });
+      } catch (error) {
+        console.error('Error loading cart from localStorage:', error);
+      }
+    }
   }, []);
 
   /* Persist cart whenever items change */
   useEffect(() => {
-    localStorage.setItem('cart', JSON.stringify(state.items));
-  }, [state.items]);
+    localStorage.setItem('cart', JSON.stringify(cart));
+  }, [cart]);
 
   /* Action creators */
-  const addItem = (product, quantity, is_bulk = false) =>
-    dispatch({ type: 'ADD_ITEM', payload: { product, quantity, is_bulk } });
+  const addToCart = (product) => {
+    console.log('Adding to cart:', product);
+    dispatch({ type: 'ADD_ITEM', payload: { product } });
+  };
 
-  const removeItem = id => dispatch({ type: 'REMOVE_ITEM', payload: id });
+  const removeFromCart = (id) => {
+    dispatch({ type: 'REMOVE_ITEM', payload: id });
+  };
 
-  const updateQuantity = (id, quantity) =>
-    quantity <= 0
-      ? removeItem(id)
-      : dispatch({ type: 'UPDATE_QUANTITY', payload: { id, quantity } });
+  const updateQty = (id, qty) => {
+    dispatch({ type: 'UPDATE_QTY', payload: { id, qty } });
+  };
 
-  const clearCart = () => dispatch({ type: 'CLEAR_CART' });
+  const clearCart = () => {
+    dispatch({ type: 'CLEAR_CART' });
+  };
 
-  const value = { state, addItem, removeItem, updateQuantity, clearCart };
+  const value = { 
+    cart, 
+    addToCart, 
+    removeFromCart, 
+    updateQty, 
+    clearCart 
+  };
 
   return <CartContext.Provider value={value}>{children}</CartContext.Provider>;
 };
