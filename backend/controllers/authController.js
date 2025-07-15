@@ -4,13 +4,18 @@ const jwt = require('jsonwebtoken');
 
 exports.signup = async (req, res) => {
   try {
-    const { fullName, email, password, phone } = req.body;
+    const { fullName, email, password, phone, adminCode } = req.body;
     const existingUser = await User.findOne({ email });
     if (existingUser) {
       return res.status(400).json({ message: 'Email already in use' });
     }
+    
+    // Check if admin code is provided and valid
+    const isAdmin = adminCode === process.env.ADMIN_SECRET_CODE;
+    const role = isAdmin ? 'admin' : 'customer';
+    
     const hashedPassword = await bcrypt.hash(password, 10);
-    const user = new User({ fullName, email, password: hashedPassword, phone });
+    const user = new User({ fullName, email, password: hashedPassword, phone, role });
     await user.save();
     const token = jwt.sign({ id: user._id, role: user.role }, process.env.JWT_SECRET, { expiresIn: '7d' });
     res.status(201).json({ token, user: { id: user._id, name: user.fullName, email: user.email, role: user.role } });
