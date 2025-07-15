@@ -12,7 +12,7 @@ const ProductCard = ({ product }) => {
   };
 
   return (
-    <div className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 border border-amber-100">
+    <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 border border-amber-100 dark:border-gray-700">
       <Link to={`/products/${product._id}`}>
         <div className="relative">
           <img
@@ -35,12 +35,12 @@ const ProductCard = ({ product }) => {
 
       <div className="p-4">
         <Link to={`/products/${product._id}`}>
-          <h3 className="text-lg font-semibold text-amber-900 mb-2 hover:text-amber-700 transition-colors">
+          <h3 className="text-lg font-semibold text-amber-900 dark:text-amber-100 mb-2 hover:text-amber-700 dark:hover:text-amber-200 transition-colors">
             {product.name}
           </h3>
         </Link>
 
-        <p className="text-gray-600 text-sm mb-3 line-clamp-2">
+        <p className="text-gray-600 dark:text-gray-300 text-sm mb-3 line-clamp-2">
           {product.description}
         </p>
 
@@ -50,7 +50,7 @@ const ProductCard = ({ product }) => {
           </span>
           <div className="flex items-center space-x-1">
             <Star className="w-4 h-4 fill-yellow-400 text-yellow-400" />
-            <span className="text-sm text-gray-600">{product.averageRating || 4.5}</span>
+            <span className="text-sm text-gray-600 dark:text-gray-300">{product.averageRating || 4.5}</span>
           </div>
         </div>
 

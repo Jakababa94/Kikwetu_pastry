@@ -33,14 +33,14 @@ const ProductDetail = () => {
     setTimeout(() => setAdded(false), 1500);
   };
 
-  if (loading) return <div className="text-center py-16">Loading...</div>;
+  if (loading) return <div className="text-center py-16 dark:text-white">Loading...</div>;
   if (error) return <div className="text-center py-16 text-red-500">{error}</div>;
   if (!product) return null;
 
   return (
     <div className="max-w-4xl mx-auto px-4 py-8">
-      <Link to="/products" className="text-amber-600 hover:underline mb-4 inline-block">&larr; Back to Products</Link>
-      <div className="bg-white rounded-xl shadow-lg overflow-hidden">
+      <Link to="/products" className="text-amber-600 dark:text-amber-400 hover:underline mb-4 inline-block">&larr; Back to Products</Link>
+      <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden">
         <div className="md:flex">
           <div className="md:w-1/2">
             <img 
@@ -50,23 +50,23 @@ const ProductDetail = () => {
             />
           </div>
           <div className="md:w-1/2 p-8">
-            <h1 className="text-3xl font-bold text-gray-900 mb-2">{product.name}</h1>
-            <div className="text-2xl font-bold text-amber-600 mb-4">${product.price.toFixed(2)}</div>
-            <div className="text-gray-600 mb-4">{product.description}</div>
+            <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">{product.name}</h1>
+            <div className="text-2xl font-bold text-amber-600 dark:text-amber-400 mb-4">${product.price.toFixed(2)}</div>
+            <div className="text-gray-600 dark:text-gray-300 mb-4">{product.description}</div>
             <div className="space-y-2 mb-6">
               <div className="flex justify-between">
-                <span className="text-gray-700">Category:</span>
-                <span className="font-medium">{product.category}</span>
+                <span className="text-gray-700 dark:text-gray-300">Category:</span>
+                <span className="font-medium dark:text-white">{product.category}</span>
               </div>
               <div className="flex justify-between">
-                <span className="text-gray-700">Stock:</span>
+                <span className="text-gray-700 dark:text-gray-300">Stock:</span>
                 <span className={`font-medium ${product.stock > 0 ? 'text-green-600' : 'text-red-600'}`}>
                   {product.stock > 0 ? `${product.stock} available` : 'Out of stock'}
                 </span>
               </div>
               <div className="flex justify-between">
-                <span className="text-gray-700">Rating:</span>
-                <span className="font-medium">{product.averageRating || 0} ({product.numReviews || 0} reviews)</span>
+                <span className="text-gray-700 dark:text-gray-300">Rating:</span>
+                <span className="font-medium dark:text-white">{product.averageRating || 0} ({product.numReviews || 0} reviews)</span>
               </div>
             </div>
             <button 

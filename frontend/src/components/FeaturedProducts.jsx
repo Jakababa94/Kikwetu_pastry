@@ -26,11 +26,11 @@ const FeaturedProducts = () => {
 
   if (loading) {
     return (
-      <div className="py-16 bg-white">
+      <div className="py-16 bg-white dark:bg-gray-900">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
             <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-amber-500 mx-auto"></div>
-            <p className="mt-4 text-gray-600">Loading featured products...</p>
+            <p className="mt-4 text-gray-600 dark:text-gray-300">Loading featured products...</p>
           </div>
         </div>
       </div>
@@ -38,13 +38,13 @@ const FeaturedProducts = () => {
   }
 
   return (
-    <section className="py-16 bg-white">
+    <section className="py-16 bg-white dark:bg-gray-900">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold text-amber-900 mb-4">
+          <h2 className="text-3xl md:text-4xl font-bold text-amber-900 dark:text-amber-100 mb-4">
             Featured Pastries
           </h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+          <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
             Discover our most popular and delicious pastries, crafted with authentic Kenyan flavors
           </p>
         </div>

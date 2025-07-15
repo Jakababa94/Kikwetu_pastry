@@ -4,7 +4,7 @@ import { Button } from '../components/ui/button';
 
 function RequireAdmin({ children }) {
   const { user, loading } = useAuth();
-  if (loading) return <div>Loading...</div>;
+  if (loading) return <div className="dark:text-white">Loading...</div>;
   if (!user || user.role !== 'admin') {
     return <div className="text-center py-16 text-red-600 font-bold">Access denied. Admins only.</div>;
   }
@@ -15,8 +15,8 @@ const AdminDashboard = () => {
   const [tab, setTab] = useState('products');
   return (
     <RequireAdmin>
-      <div>
-        <h1 className="text-3xl font-bold mb-6 text-orange-700">Admin Dashboard</h1>
+      <div className="max-w-7xl mx-auto px-4 py-8">
+        <h1 className="text-3xl font-bold mb-6 text-orange-700 dark:text-orange-400">Admin Dashboard</h1>
         <div className="flex gap-4 mb-8">
           <Button variant={tab === 'products' ? 'primary' : 'secondary'} onClick={() => setTab('products')}>Products</Button>
           <Button variant={tab === 'orders' ? 'primary' : 'secondary'} onClick={() => setTab('orders')}>Orders</Button>
@@ -101,19 +101,19 @@ function AdminProducts() {
   };
 
   return (
-    <div className="bg-yellow-50 border border-orange-200 rounded-xl shadow p-6">
+    <div className="bg-yellow-50 dark:bg-gray-800 border border-orange-200 dark:border-gray-700 rounded-xl shadow p-6">
       <div className="flex justify-between items-center mb-4">
-        <h2 className="text-2xl font-bold text-orange-800">Products</h2>
+        <h2 className="text-2xl font-bold text-orange-800 dark:text-orange-300">Products</h2>
         <Button variant="primary" onClick={() => { setEditProduct(null); setShowModal(true); }}>+ Add Product</Button>
       </div>
       {loading ? (
-        <div>Loading...</div>
+        <div className="dark:text-white">Loading...</div>
       ) : error ? (
         <div className="text-red-600">{error}</div>
       ) : (
         <table className="w-full text-left">
           <thead>
-            <tr className="border-b border-orange-200 text-orange-700">
+            <tr className="border-b border-orange-200 dark:border-gray-600 text-orange-700 dark:text-orange-300">
               <th className="py-2">Name</th>
               <th>Price</th>
               <th>Stock</th>
@@ -123,7 +123,7 @@ function AdminProducts() {
           </thead>
           <tbody>
             {products.map((product) => (
-              <tr key={product._id} className="border-b border-orange-100 hover:bg-yellow-100">
+              <tr key={product._id} className="border-b border-orange-100 dark:border-gray-700 hover:bg-yellow-100 dark:hover:bg-gray-700 dark:text-white">
                 <td className="py-2">{product.name}</td>
                 <td>${product.price.toFixed(2)}</td>
                 <td>{product.stock}</td>
@@ -177,16 +177,16 @@ function ProductModal({ product, onClose, onSave, loading, error }) {
   };
   return (
     <div className="fixed inset-0 bg-black bg-opacity-30 flex items-center justify-center z-50">
-      <div className="bg-white rounded-xl shadow-lg p-8 w-full max-w-md">
-        <h3 className="text-xl font-bold mb-4 text-orange-700">{product ? 'Edit Product' : 'Add Product'}</h3>
+      <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-8 w-full max-w-md">
+        <h3 className="text-xl font-bold mb-4 text-orange-700 dark:text-orange-300">{product ? 'Edit Product' : 'Add Product'}</h3>
         {error && <div className="text-red-600 mb-2">{error}</div>}
         <form onSubmit={handleSubmit} className="space-y-3">
-          <input name="name" value={form.name} onChange={handleChange} placeholder="Name" required className="w-full border border-orange-200 rounded px-3 py-2" />
-          <input name="price" value={form.price} onChange={handleChange} placeholder="Price" type="number" min="0" required className="w-full border border-orange-200 rounded px-3 py-2" />
-          <input name="stock" value={form.stock} onChange={handleChange} placeholder="Stock" type="number" min="0" required className="w-full border border-orange-200 rounded px-3 py-2" />
-          <input name="category" value={form.category} onChange={handleChange} placeholder="Category" required className="w-full border border-orange-200 rounded px-3 py-2" />
-          <input name="image" value={form.image} onChange={handleChange} placeholder="Image URL" className="w-full border border-orange-200 rounded px-3 py-2" />
-          <textarea name="description" value={form.description} onChange={handleChange} placeholder="Description" className="w-full border border-orange-200 rounded px-3 py-2" />
+          <input name="name" value={form.name} onChange={handleChange} placeholder="Name" required className="w-full border border-orange-200 dark:border-gray-600 dark:bg-gray-700 dark:text-white rounded px-3 py-2" />
+          <input name="price" value={form.price} onChange={handleChange} placeholder="Price" type="number" min="0" required className="w-full border border-orange-200 dark:border-gray-600 dark:bg-gray-700 dark:text-white rounded px-3 py-2" />
+          <input name="stock" value={form.stock} onChange={handleChange} placeholder="Stock" type="number" min="0" required className="w-full border border-orange-200 dark:border-gray-600 dark:bg-gray-700 dark:text-white rounded px-3 py-2" />
+          <input name="category" value={form.category} onChange={handleChange} placeholder="Category" required className="w-full border border-orange-200 dark:border-gray-600 dark:bg-gray-700 dark:text-white rounded px-3 py-2" />
+          <input name="image" value={form.image} onChange={handleChange} placeholder="Image URL" className="w-full border border-orange-200 dark:border-gray-600 dark:bg-gray-700 dark:text-white rounded px-3 py-2" />
+          <textarea name="description" value={form.description} onChange={handleChange} placeholder="Description" className="w-full border border-orange-200 dark:border-gray-600 dark:bg-gray-700 dark:text-white rounded px-3 py-2" />
           <div className="flex gap-2 mt-4">
             <Button type="submit" variant="primary" disabled={loading}>{loading ? 'Saving...' : 'Save'}</Button>
             <Button type="button" variant="secondary" onClick={onClose} disabled={loading}>Cancel</Button>

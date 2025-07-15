@@ -42,17 +42,17 @@ const Auth = ({ type }) => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-amber-50 to-orange-50 py-12">
+    <div className="min-h-screen bg-gradient-to-br from-amber-50 to-orange-50 dark:from-gray-900 dark:to-gray-800 py-12">
       <div className="max-w-md mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="bg-white rounded-xl shadow-lg p-8">
+        <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-8">
           <div className="text-center mb-8">
             <div className="w-16 h-16 bg-gradient-to-br from-amber-400 to-orange-500 rounded-full flex items-center justify-center mx-auto mb-4">
               <span className="text-white font-bold text-2xl">🥐</span>
             </div>
-            <h2 className="text-3xl font-bold text-amber-900">
+            <h2 className="text-3xl font-bold text-amber-900 dark:text-amber-100">
               {type === 'login' ? 'Welcome Back' : 'Join Kikwetu Pastries'}
             </h2>
-            <p className="text-gray-600 mt-2">
+            <p className="text-gray-600 dark:text-gray-300 mt-2">
               {type === 'login'
                 ? 'Sign in to your account'
                 : 'Create your account to start ordering'}
@@ -69,13 +69,13 @@ const Auth = ({ type }) => {
             {type === 'signup' && (
               <>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-2">
                     Full Name
                   </label>
                   <input
                     {...register('fullName', { required: 'Full name is required' })}
                     type="text"
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-transparent"
+                    className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-transparent"
                     placeholder="Enter your full name"
                   />
                   {errors.fullName && (
@@ -84,13 +84,13 @@ const Auth = ({ type }) => {
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-2">
                     Phone Number
                   </label>
                   <input
                     {...register('phone', { required: 'Phone number is required' })}
                     type="tel"
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-transparent"
+                    className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-transparent"
                     placeholder="Enter your phone number"
                   />
                   {errors.phone && (
@@ -99,16 +99,16 @@ const Auth = ({ type }) => {
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-2">
                     Admin Code (Optional)
                   </label>
                   <input
                     {...register('adminCode')}
                     type="password"
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-transparent"
+                    className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-transparent"
                     placeholder="Enter admin code if registering as admin"
                   />
-                  <p className="mt-1 text-sm text-gray-500">
+                  <p className="mt-1 text-sm text-gray-500 dark:text-gray-400">
                     Leave empty to register as a customer
                   </p>
                 </div>
@@ -116,7 +116,7 @@ const Auth = ({ type }) => {
             )}
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-2">
                 Email Address
               </label>
               <input
@@ -128,7 +128,7 @@ const Auth = ({ type }) => {
                   },
                 })}
                 type="email"
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-transparent"
+                className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-transparent"
                 placeholder="Enter your email"
               />
               {errors.email && (
@@ -137,7 +137,7 @@ const Auth = ({ type }) => {
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-2">
                 Password
               </label>
               <div className="relative">
@@ -150,7 +150,7 @@ const Auth = ({ type }) => {
                     },
                   })}
                   type={showPassword ? 'text' : 'password'}
-                  className="w-full px-3 py-2 pr-10 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-transparent"
+                  className="w-full px-3 py-2 pr-10 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-transparent"
                   placeholder="Enter your password"
                 />
                 <button
@@ -168,7 +168,7 @@ const Auth = ({ type }) => {
 
             {type === 'signup' && (
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-2">
                   Confirm Password
                 </label>
                 <input
@@ -177,7 +177,7 @@ const Auth = ({ type }) => {
                     validate: (value) => value === password || 'Passwords do not match',
                   })}
                   type="password"
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-transparent"
+                  className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-transparent"
                   placeholder="Confirm your password"
                 />
                 {errors.confirmPassword && (
@@ -205,11 +205,11 @@ const Auth = ({ type }) => {
           </form>
 
           <div className="mt-8 text-center">
-            <p className="text-gray-600">
+            <p className="text-gray-600 dark:text-gray-300">
               {type === 'login' ? "Don't have an account?" : 'Already have an account?'}
               <Link
                 to={type === 'login' ? '/signup' : '/login'}
-                className="ml-1 text-amber-600 hover:text-amber-700 font-medium"
+                className="ml-1 text-amber-600 hover:text-amber-700 dark:text-amber-400 dark:hover:text-amber-300 font-medium"
               >
                 {type === 'login' ? 'Sign up' : 'Sign in'}
               </Link>

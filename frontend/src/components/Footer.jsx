@@ -4,7 +4,7 @@ import { Facebook, Twitter, Instagram, Phone, Mail, MapPin } from 'lucide-react'
 
 const Footer= () => {
   return (
-    <footer className="bg-amber-900 text-white">
+    <footer className="bg-amber-900 dark:bg-gray-900 text-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           {/* Company Info */}
@@ -105,8 +105,8 @@ const Footer= () => {
           </div>
         </div>
 
-        <div className="border-t border-amber-800 mt-8 pt-8 text-center">
-          <p className="text-amber-200">
+        <div className="border-t border-amber-800 dark:border-gray-700 mt-8 pt-8 text-center">
+          <p className="text-amber-200 dark:text-gray-300">
             &copy; 2025 Kikwetu Pastries. All rights reserved.
           </p>
         </div>

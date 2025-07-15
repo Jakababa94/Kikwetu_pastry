@@ -27,35 +27,35 @@ const Orders = () => {
     fetchOrders();
   }, [token]);
 
-  if (authLoading || loading) return <div>Loading...</div>;
-  if (!token) return <div className="text-center py-16">Please log in to view your orders.</div>;
+  if (authLoading || loading) return <div className="dark:text-white">Loading...</div>;
+  if (!token) return <div className="text-center py-16 dark:text-white">Please log in to view your orders.</div>;
   if (error) return <div className="text-red-500">{error}</div>;
 
   return (
-    <div>
-      <h1 className="text-3xl font-bold mb-8">My Orders</h1>
+    <div className="max-w-4xl mx-auto px-4 py-8">
+      <h1 className="text-3xl font-bold mb-8 dark:text-white">My Orders</h1>
       {orders.length === 0 ? (
-        <div className="text-muted-foreground">You have no orders yet.</div>
+        <div className="text-muted-foreground dark:text-gray-400">You have no orders yet.</div>
       ) : (
         <div className="space-y-6">
           {orders.map((order) => (
-            <div key={order._id} className="bg-card rounded-lg shadow p-6">
+            <div key={order._id} className="bg-card dark:bg-gray-800 rounded-lg shadow p-6">
               <div className="flex flex-col md:flex-row md:justify-between md:items-center mb-2">
                 <div>
-                  <span className="font-semibold">Order #</span> {order._id}
+                  <span className="font-semibold dark:text-white">Order #</span> <span className="dark:text-gray-300">{order._id}</span>
                 </div>
-                <div className="text-muted-foreground">{new Date(order.createdAt).toLocaleDateString()}</div>
+                <div className="text-muted-foreground dark:text-gray-400">{new Date(order.createdAt).toLocaleDateString()}</div>
               </div>
               <ul className="mb-2">
                 {order.orderItems.map((item, idx) => (
-                  <li key={idx} className="text-sm">
+                  <li key={idx} className="text-sm dark:text-gray-300">
                     {item.quantity} × {item.product?.name || 'Product'}
                   </li>
                 ))}
               </ul>
               <div className="flex justify-between items-center">
-                <span className="font-bold text-primary">Total: ${order.totalPrice.toFixed(2)}</span>
-                <span className={`px-3 py-1 rounded-full text-xs font-semibold ${order.status === 'delivered' ? 'bg-green-100 text-green-700' : order.status === 'processing' ? 'bg-yellow-100 text-yellow-700' : 'bg-gray-100 text-gray-700'}`}>{order.status}</span>
+                <span className="font-bold text-primary dark:text-amber-400">Total: ${order.totalPrice.toFixed(2)}</span>
+                <span className={`px-3 py-1 rounded-full text-xs font-semibold ${order.status === 'delivered' ? 'bg-green-100 text-green-700 dark:bg-green-900 dark:text-green-300' : order.status === 'processing' ? 'bg-yellow-100 text-yellow-700 dark:bg-yellow-900 dark:text-yellow-300' : 'bg-gray-100 text-gray-700 dark:bg-gray-700 dark:text-gray-300'}`}>{order.status}</span>
               </div>
             </div>
           ))}

@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 const categories = [
   {
     name: 'Cakes',
-    image: 'https://images.pexels.com/photos/1721932/pexels-photo-1721932.jpeg?auto=compress&cs=tinysrgb&w=400&h=300&dpr=1',
+    image: 'https://i.pinimg.com/736x/75/84/1a/75841a7276c14f937cbce8a167e17d92.jpg',
     description: 'Custom cakes for all occasions',
     link: '/products?category=cakes'
   },

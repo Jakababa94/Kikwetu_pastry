@@ -4,19 +4,19 @@ import { ChevronRight } from 'lucide-react';
 
 const Hero = () => {
   return (
-    <div className="relative bg-gradient-to-br from-amber-50 via-orange-50 to-red-50 min-h-[500px] flex items-center">
-      <div className="absolute inset-0 bg-[url('https://images.pexels.com/photos/1070850/pexels-photo-1070850.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1')] bg-cover bg-center opacity-10"></div>
+    <div className="relative bg-gradient-to-br from-amber-50 via-orange-50 to-red-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 min-h-[500px] flex items-center">
+      <div className="absolute inset-0 bg-[url('https://images.pexels.com/photos/1070850/pexels-photo-1070850.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1')] bg-cover bg-center opacity-10 dark:opacity-5"></div>
       
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
         <div className="grid md:grid-cols-2 gap-12 items-center">
           <div>
-            <h1 className="text-4xl md:text-6xl font-bold text-amber-900 mb-6 leading-tight">
+            <h1 className="text-4xl md:text-6xl font-bold text-amber-900 dark:text-amber-100 mb-6 leading-tight">
               Authentic Kenyan
-              <span className="block text-green-700">Pastries</span>
-              <span className="block text-orange-600">Delivered Fresh</span>
+              <span className="block text-green-700 dark:text-green-400">Pastries</span>
+              <span className="block text-orange-600 dark:text-orange-400">Delivered Fresh</span>
             </h1>
             
-            <p className="text-xl text-amber-800 mb-8 leading-relaxed">
+            <p className="text-xl text-amber-800 dark:text-amber-200 mb-8 leading-relaxed">
               From traditional mandazi to modern cakes, we bring you the finest pastries 
               made with love and authentic Kenyan flavors. Perfect for celebrations, 
               events, or your daily treat.
