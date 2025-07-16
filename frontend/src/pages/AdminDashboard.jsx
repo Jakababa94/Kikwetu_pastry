@@ -38,10 +38,12 @@ function AdminProducts() {
   const [modalLoading, setModalLoading] = useState(false);
   const [modalError, setModalError] = useState('');
 
+  const API = import.meta.env.VITE_API_URL || '/api';
+
   const fetchProducts = async () => {
     try {
       setLoading(true);
-      const res = await fetch('/api/products', {
+      const res = await fetch(`${API}/products`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       if (!res.ok) throw new Error('Failed to fetch products');
@@ -61,7 +63,7 @@ function AdminProducts() {
     setModalError('');
     try {
       const method = editProduct ? 'PUT' : 'POST';
-      const url = editProduct ? `/api/products/${editProduct._id}` : '/api/products';
+      const url = editProduct ? `${API}/products/${editProduct._id}` : `${API}/products`;
       const res = await fetch(url, {
         method,
         headers: {
@@ -86,7 +88,7 @@ function AdminProducts() {
     setModalLoading(true);
     setModalError('');
     try {
-      const res = await fetch(`/api/products/${deleteId}`, {
+      const res = await fetch(`${API}/products/${deleteId}`, {
         method: 'DELETE',
         headers: { Authorization: `Bearer ${token}` },
       });
@@ -222,10 +224,12 @@ function AdminOrders() {
   const [modalLoading, setModalLoading] = useState(false);
   const [modalError, setModalError] = useState('');
 
+  const API = import.meta.env.VITE_API_URL || '/api';
+
   const fetchOrders = async () => {
     try {
       setLoading(true);
-      const res = await fetch('/api/orders', {
+      const res = await fetch(`${API}/orders`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       if (!res.ok) throw new Error('Failed to fetch orders');
@@ -244,7 +248,7 @@ function AdminOrders() {
     setModalLoading(true);
     setModalError('');
     try {
-      const res = await fetch(`/api/orders/${orderId}/status`, {
+      const res = await fetch(`${API}/orders/${orderId}/status`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -267,7 +271,7 @@ function AdminOrders() {
     setModalLoading(true);
     setModalError('');
     try {
-      const res = await fetch(`/api/orders/${deleteId}`, {
+      const res = await fetch(`${API}/orders/${deleteId}`, {
         method: 'DELETE',
         headers: { Authorization: `Bearer ${token}` },
       });
