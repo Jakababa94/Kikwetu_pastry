@@ -27,9 +27,11 @@ export const AuthProvider = ({ children }) => {
     setLoading(false);
   }, [token]);
 
+  const API = import.meta.env.VITE_API_URL || '/api';
+
   const signUp = async (email, password, fullName, phone, adminCode) => {
     try {
-      const response = await axios.post('/api/auth/signup', {
+      const response = await axios.post(`${API}/auth/signup`, {
         fullName,
         email,
         password,
@@ -51,7 +53,7 @@ export const AuthProvider = ({ children }) => {
 
   const signIn = async (email, password) => {
     try {
-      const response = await axios.post('/api/auth/login', {
+      const response = await axios.post(`${API}/auth/login`, {
         email,
         password
       });
