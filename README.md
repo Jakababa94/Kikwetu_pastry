@@ -4,6 +4,13 @@ A modern, full-stack web application for a pastry shop, featuring a React fronte
 
 ---
 
+## Live Demo
+
+- **Frontend:** [https://kikwetu-pastry-grlg.vercel.app/](https://kikwetu-pastry-grlg.vercel.app/)
+- **Backend API:** [https://kikwetu-pastry.onrender.com](https://kikwetu-pastry.onrender.com)
+
+---
+
 ## Features
 
 - **User Authentication:** Signup, login, and logout with JWT-based authentication. Admin registration via secret code.
